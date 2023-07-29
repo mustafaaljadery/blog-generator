@@ -5,8 +5,6 @@ type Data = {
   name: string
 }
 
-export const runtime = 'edge'
-
 export default async function handler(req: NextApiRequest, res: NextApiResponse<Data>) {
   const openAIKey = JSON.parse(req.body)['openAIKey']
   const keywords = JSON.parse(req.body)['keywords']
