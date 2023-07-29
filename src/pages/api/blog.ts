@@ -5,7 +5,7 @@ export const config = {
   runtime: 'edge',
 }
 
-export default async function handler(req: NextRequest) {
+export default async function handler(req: any) {
   const json = await req.json()
   const openAIKey = json['openAIKey']
   const keywords = json['keywords']
