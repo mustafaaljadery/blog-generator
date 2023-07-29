@@ -26,7 +26,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
         content: `Write an extremely SEO optimized blog post about the following keywords: ${keywords}. Make sure to include the keywords in the title, headings, and content. Make sure the article is no more than 400 words. The output has to be in MARKDOWN.`
       }
     ],
-    max_tokens: 3500,
+    max_tokens: 500,
     temperature: 0.9, // you want absolute certainty for spell check
   })
 
