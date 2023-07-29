@@ -1,11 +1,11 @@
-import type { NextRequest, NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 const { Configuration, OpenAIApi } = require("openai");
 
 export const config = {
   runtime: 'edge',
 }
 
-export default async function handler(req: NextRequest, res: any) {
+export default async function handler(req: NextRequest) {
   const json = await req.json()
   const openAIKey = json['openAIKey']
   const keywords = json['keywords']
@@ -30,7 +30,14 @@ export default async function handler(req: NextRequest, res: any) {
       temperature: 0.9,
     })
 
-    res.status(200).json(response.data.choices[0].message.content);
+    return new NextResponse(response.data.choices[0].message.content
+      , {
+        status: 200,
+        headers: {
+          'content-type': 'application/json',
+        },
+      }
+    );
   } catch (e) {
     console.log(e)
     //@ts-ignore
