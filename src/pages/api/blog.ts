@@ -5,6 +5,10 @@ type Data = {
   name: string
 }
 
+export const config = {
+  runtime: 'edge',
+}
+
 export default async function handler(req: NextApiRequest, res: NextApiResponse<Data>) {
   const openAIKey = JSON.parse(req.body)['openAIKey']
   const keywords = JSON.parse(req.body)['keywords']
@@ -19,15 +23,14 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
   const response = await openai.createChatCompletion({
     model: 'gpt-3.5-turbo',
     stream: false,
-    // a precise prompt is important for the AI to reply with the correct tokens
     messages: [
       {
         role: 'user',
-        content: `Write an extremely SEO optimized blog post about the following keywords: ${keywords}. Make sure to include the keywords in the title, headings, and content. Make sure the article is no more than 1000 words. The output has to be in MARKDOWN.`
+        content: `Write an extremely SEO optimized blog post about the following keywords: ${keywords}. Make sure to include the keywords in the title, headings, and content. Make sure the article is no more than 1500 words. The output has to be in MARKDOWN.`
       }
     ],
     max_tokens: 3500,
-    temperature: 0.9, // you want absolute certainty for spell check
+    temperature: 0.9,
   })
 
   if (response.status != 200) {
