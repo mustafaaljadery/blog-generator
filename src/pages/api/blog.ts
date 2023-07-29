@@ -30,5 +30,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
     temperature: 0.9, // you want absolute certainty for spell check
   })
 
+  if (response.status != 200) {
+    res.status(500).json({ name: 'Error' })
+  }
+
   res.status(200).json(response.data.choices[0].message.content)
 }

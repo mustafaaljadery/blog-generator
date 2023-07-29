@@ -9,17 +9,24 @@ const MDEditor = dynamic(() => import('@uiw/react-md-editor'), {
 });
 
 async function handleSubmit(openAIKey: string, keywords: string) {
-  const response = await fetch('/api/blog', {
-    method: 'POST',
-    body: JSON.stringify({
-      openAIKey: openAIKey,
-      keywords: keywords,
-    }),
-  });
+  try {
+    const response = await fetch('/api/blog', {
+      method: 'POST',
+      body: JSON.stringify({
+        openAIKey: openAIKey,
+        keywords: keywords,
+      }),
+    });
 
-  const data = await response.json();
-  console.log('data', data);
-  return data;
+    if (!response.ok) {
+      throw new Error(response.statusText);
+    }
+
+    const data = await response.json();
+    return data;
+  } catch (e) {
+    console.log(e);
+  }
 }
 
 export default function Home() {
