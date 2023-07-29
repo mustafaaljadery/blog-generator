@@ -46,7 +46,7 @@ export default function Guide() {
           </p>
           <p className="text-sm mt-4 font-regular text-gray-700">
             You want to find keywords that are easy to rank for as in
-            the beginning you don't have much SEO authority.
+            the beginning you don&apos;t have much SEO authority.
           </p>
         </div>
         <div className="mt-8 flex flex-col justify-center items-center">
