@@ -30,6 +30,8 @@ export default async function handler(req: NextRequest) {
       temperature: 0.9,
     })
 
+    console.log(response.data.choices[0].message.content)
+
     return new NextResponse(response.data.choices[0].message.content
       , {
         status: 200,
